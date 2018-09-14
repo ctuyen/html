@@ -41,11 +41,19 @@
     function render() {
       var htmlList = document.getElementById('todo-list');
       var content = todoList.map(function(item) {
-        return '<li>' + item + '</li>';
+        var id = todoList.indexOf(item);
+        return '<li>' + item + ' <button onclick="deleteItem(' 
+          + id +')">Delete</button></li>';
       });
       htmlList.innerHTML = content.join('');
     }
     render();
+
+    function deleteItem(id) {
+      todoList.splice(id, 1);
+      localStorage.setItem(storageKey, JSON.stringify(todoList));
+      render();
+    }
   </script>
 </body>
 </html>
